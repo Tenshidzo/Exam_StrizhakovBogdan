@@ -81,4 +81,25 @@ fetch(url)
     })
     .catch(error => {
         console.error('There was a problem with your fetch operation:', error);
+});
+function updatePrice() {
+    let totalPrice = 59; 
+    document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+        if (radio.checked) {
+            totalPrice = parseFloat(radio.getAttribute('data-price'));
+        }
     });
+    document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+        if (checkbox.checked) {
+            totalPrice += parseFloat(checkbox.getAttribute('data-price'));
+        }
+    });
+    document.getElementById('price').innerText = totalPrice;
+}
+document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+    radio.addEventListener('change', updatePrice);
+});
+document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+    checkbox.addEventListener('change', updatePrice);
+});
+updatePrice();
